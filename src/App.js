@@ -66,6 +66,7 @@ const announceWinner = ()=>{
   
   if(result==="Draw"){
     alert("Draw!");
+    reset();
   }
   else if(result==="X"){
     alert("Winner : Player "+result);
