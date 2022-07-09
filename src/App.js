@@ -15,6 +15,8 @@ function App() {
  
   const [player,setPlayer]=useState("X");
   const [result,setResult]=useState("");
+  const [xwin,setXwin]=useState(0);
+  const [owin,setOwin]=useState(0);
   const setSquare = ()=>{
     if(player==="X"){
       setPlayer("O");
@@ -61,14 +63,27 @@ function App() {
 
 
 const announceWinner = ()=>{
+  
   if(result==="Draw"){
     alert("Draw!");
   }
-  else if(result!==""){
+  else if(result==="X"){
     alert("Winner : Player "+result);
+    incX();
+    reset();
+    
+  }
+  else if(result==="O"){
+   
+    alert("Winner : Player "+result);
+    incO();
+    reset();
+   
   }
   
 }
+
+
 
 
  useEffect(()=>{
@@ -85,15 +100,52 @@ const announceWinner = ()=>{
  })
 
 
+const reset = ()=>{
+    setBox0("");
+    setBox1("");
+    setBox2("");
+    setBox3("");
+    setBox4("");
+    setBox5("");
+    setBox6("");
+    setBox7("");
+    setBox8("");
+ 
+    setResult("");
+    setPlayer("X");
+  
+}
 
+
+const incX = ()=>{
+  setXwin(xwin+1);
+}
+const incO = ()=>{
+  setOwin(owin+1);
+}
 
 
 
 
   return (
+
+
     <div className="App">
       <div className="header">
         <h1>Tic Tac Toe</h1>
+        
+      </div>
+     
+      <div className="resultbox">
+        <div>
+        <h1>X : {xwin}</h1>
+        </div>
+
+        <div>
+        <h1>O : {owin}</h1>
+        </div>
+         
+         
       </div>
 
       <div className="board">
@@ -121,7 +173,6 @@ const announceWinner = ()=>{
            <div className="square-box" onClick={()=>{
             if(box2===""){
               setBox2(player);
-              
               setSquare();
             }
            
@@ -133,8 +184,7 @@ const announceWinner = ()=>{
 
            <div className="square-box" onClick={()=>{
              if(box3===""){
-              setBox3(player);
-              
+              setBox3(player); 
               setSquare();
             }
             
@@ -144,7 +194,6 @@ const announceWinner = ()=>{
            <div className="square-box" onClick={()=>{
              if(box4===""){
               setBox4(player);
-             
               setSquare();
             }
              
@@ -154,7 +203,6 @@ const announceWinner = ()=>{
            <div className="square-box" onClick={()=>{
              if(box5===""){
               setBox5(player);
-             
               setSquare();
             }
              
@@ -169,7 +217,6 @@ const announceWinner = ()=>{
            <div className="square-box" onClick={()=>{
               if(box6===""){
                 setBox6(player);
-                
                 setSquare();
               }
              
@@ -179,7 +226,6 @@ const announceWinner = ()=>{
            <div className="square-box" onClick={()=>{
              if(box7===""){
               setBox7(player);
-             
               setSquare();
             }
             
@@ -189,7 +235,6 @@ const announceWinner = ()=>{
            <div className="square-box" onClick={()=>{
              if(box8===""){
               setBox8(player);
-             
               setSquare();
             }
             
@@ -203,20 +248,10 @@ const announceWinner = ()=>{
 
 
       <button onClick={()=>{
-          setBox0("");
-          setBox1("");
-          setBox2("");
-          setBox3("");
-          setBox4("");
-          setBox5("");
-          setBox6("");
-          setBox7("");
-          setBox8("");
-
-          
-          setResult("");
-          setPlayer("X");
-        }}>Reset</button>
+          reset();
+          setXwin(0);
+          setOwin(0);
+      }}>Restart</button>
     </div>
   );
 }
